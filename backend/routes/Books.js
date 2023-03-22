@@ -10,8 +10,8 @@ let ALL_BOOKS = [
   {
     id: uuidv4(),
     title: 'JavaScript For Dummies',
-    start: new Date(2021, 10, 1),
-    end: new Date(2021, 10, 5),
+    start: new Date(2023, 02, 4),
+    end: new Date(2023, 02, 23),
   }
 ];
 
@@ -97,6 +97,7 @@ router.put("/:id", (req, res) => {
     return;
   }
 
+  //мутируется свойства книги
   book.title    = newTitle;
   book.start    = newStart;
   book.end      = newEnd;

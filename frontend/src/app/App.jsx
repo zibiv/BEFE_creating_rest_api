@@ -1,4 +1,4 @@
-import BookSchedule from './components/Booklist';
+import BookSchedule from '../components/BookList/Booklist';
 
 
 function App() {

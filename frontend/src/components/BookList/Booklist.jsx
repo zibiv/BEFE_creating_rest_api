@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import CalendarComponent from './calendar';
-import Book from './Book';
+import CalendarComponent from '../calendar';
+import Book from '../Book/Book';
 import {
   getBooks,
   addNewBook
-} from '../api/books';
+} from '../../api/books';
 
 // Material UI
 import List from '@mui/material/List';
@@ -15,7 +15,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker'
 import Stack from '@mui/material/Stack';
 
-import '../App.css';
+import '../../app/App';
 
 const BookSchedule = () => {
   // GET from API

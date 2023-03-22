@@ -13,7 +13,7 @@ const CalendarComponent = ({events}) => {
       <Calendar
           localizer={localizer}
           events={events}
-          views={['month', 'week', 'day']}
+          views={['month']}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 600 }}
