@@ -1,7 +1,8 @@
 import React from "react";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-let moment = require('moment');
+import moment from 'moment';
+
 
 const CalendarComponent = ({events}) => {
 
