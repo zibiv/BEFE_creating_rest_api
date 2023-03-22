@@ -56,6 +56,7 @@ const BookSchedule = () => {
   const bookTitle = books.map((book) => {
     return (
       <Book  
+      key = {book.id + '_keyForList'}
       bookId={book.id}
       bookTitle={book.title}
       bookStart={book.start}
