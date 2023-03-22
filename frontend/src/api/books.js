@@ -23,7 +23,7 @@ export const addNewBook = async (newBookTitle, newBookStart, newBookEnd) => {
 
 // TODO: Create the updateBook function that takes the arguments id, newTitle, newStart, newEnd. Inside of the function, create a PUT request for the specified book to be updated. Return the status of the response at the end of the function.
 
-const updateBook = async (id, newTitle, newStart, newEnd) => {
+export const updateBook = async (id, newTitle, newStart, newEnd) => {
   const response = await fetch(`${BOOKS_API}/${id}`, {
     method: 'PUT',
     headers: {
@@ -40,3 +40,10 @@ const updateBook = async (id, newTitle, newStart, newEnd) => {
 }
 
 // TODO: Create the deleteBook function that takes the id of the book to be deleted as an argument. Inside of the function, create a DELETE request for the specified book to be deleted. Return the status of the response at the end of the function.
+export const deleteBook = async (id) => {
+  const response = await fetch(`${BOOKS_API}/${id}`, {
+    method: 'DELETE'
+  });
+  
+  return response.status;
+}
