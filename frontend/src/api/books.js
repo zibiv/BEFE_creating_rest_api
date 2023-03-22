@@ -2,8 +2,8 @@
 import { API_ENDPOINT } from './';
 const BOOKS_API = API_ENDPOINT + '/books';
 // TODO: Create the addNewBook function that takes in newTitle, newStart, and newEnd as arguments. Inside the function, create a POST request for the new book. Store the response as a JSON in a variable called newBook and return it at the end of the function.
-export const addNewBook = async (newBookTitle, newBookStart, newBookEnd) => {
-  const respond = await fetch(BOOKS_API, {
+export const addNewBook =  (newBookTitle, newBookStart, newBookEnd) => {
+  fetch(BOOKS_API, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -13,18 +13,18 @@ export const addNewBook = async (newBookTitle, newBookStart, newBookEnd) => {
       start: newBookStart,
       end: newBookEnd,
     }),
-  });
-
-  const newBookJson = await respond.json();
-  return newBookJson;
+  }).then(response => response.json())
+  .then(newBook =>  newBook);
 
 };
 // TODO: Create the getBooks function that retrieves all of the books that have been saved to the back-end API
 export const getBooks = async () => {
   const response = await fetch(BOOKS_API); 
-  const books = await response.json();
-  
-  return books;
+  if(response.ok) {
+    const books = await response.json();
+    return books;
+  }
+  return [];
 }
 // TODO: Create the updateBook function that takes the arguments id, newTitle, newStart, newEnd. Inside of the function, create a PUT request for the specified book to be updated. Return the status of the response at the end of the function.
 

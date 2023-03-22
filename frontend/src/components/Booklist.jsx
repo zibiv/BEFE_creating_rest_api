@@ -39,12 +39,15 @@ const BookSchedule = () => {
       
   // Add a new book to the list
   const onAddNewBook = async () => {
-    const newBook = await addNewBook(newBookTitle, newBookStart, newBookEnd);
+    addNewBook(newBookTitle, newBookStart, newBookEnd)
+    .then( newBook => {
+      setBooks((previousBooks) => [
+        ...previousBooks,
+        newBook,
+      ]);
+    });
 
-    setBooks((previousBooks) => [
-      ...previousBooks,
-      newBook,
-    ]);
+
   };
 
 
