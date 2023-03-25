@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import CalendarComponent from '../calendar';
 import Book from '../Book/Book';
-import {
-  getBooks,
-  addNewBook
-} from '../../api/books';
+
+import { getBooksAction, addNewBookAction } from './bookListSlice';
+
+import { selectAllBooks } from './bookListSlice';
+import { useSelector, useDispatch } from "react-redux";
 
 // Material UI
 import List from '@mui/material/List';
@@ -15,11 +16,14 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker'
 import Stack from '@mui/material/Stack';
 
-import '../../app/App';
+import '../../app/App.css';
 
 const BookSchedule = () => {
   // GET from API
-  const [books, setBooks] = useState([]);
+  // const booksFromStore = useSelector(selectAllBooks);
+  const books = useSelector(selectAllBooks);
+
+  const dispatch = useDispatch();
 
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
@@ -30,24 +34,13 @@ const BookSchedule = () => {
 
   // Fetch Data from API
   useEffect(() => {
-    async function fetchData() {
-      const booksData = await getBooks();
-      setBooks(booksData);
-    }
-    fetchData();
+    console.log('fetching in effect')
+    dispatch(getBooksAction());
   }, []);
       
   // Add a new book to the list
-  const onAddNewBook = async () => {
-    addNewBook(newBookTitle, newBookStart, newBookEnd)
-    .then( newBook => {
-      setBooks((previousBooks) => [
-        ...previousBooks,
-        newBook,
-      ]);
-    });
-
-
+  const onAddNewBook = () => {
+    dispatch(addNewBookAction(newBookTitle, newBookStart, newBookEnd));
   };
 
 
@@ -61,7 +54,6 @@ const BookSchedule = () => {
       bookTitle={book.title}
       bookStart={book.start}
       bookEnd={book.end}
-      setBooks={setBooks}
       />
     )
   
