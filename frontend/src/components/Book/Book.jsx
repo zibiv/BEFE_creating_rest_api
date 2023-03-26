@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { deleteBook, updateBook } from '../../api/books';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateBook } from '../../api/books';
+import { deleteBookAction } from '../BookList/bookListSlice';
 
 // Material UI
 import TextField from '@mui/material/TextField';
@@ -11,17 +13,12 @@ const Book = ({ setBooks, bookId, bookTitle, bookStart, bookEnd }) => {
   const [updateNewBookTitle, setNewUpdateBookTitle] = useState(bookTitle);
   const [updateNewBookStart, setNewUpdateBookStart] = useState(bookStart);
   const [updateNewBookEnd, setNewUpdateBookEnd] = useState(bookEnd);
+  const dispatch = useDispatch();
 
   // Delete a specific book
   const onDeleteBook = async (id) => {
-    const responseStatus = await deleteBook(id);
-
-    if (responseStatus !== 200) {
-      alert('Deleting failed');
-      return;
-    }
-    //при удалении, компонент книги запускает фильтрацию книг в родительском компоненте, что бы убрать себ яиз массива
-    setBooks((previousBooks) => previousBooks.filter((book) => book.id !== id));
+    //код заменен на диспетчеризацию действия
+    dispatch(deleteBookAction(id));
   };
 
   // Update a previous book

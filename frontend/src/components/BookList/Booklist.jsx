@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CalendarComponent from '../calendar';
 import Book from '../Book/Book';
 
-import { getBooksAction, addNewBookAction } from './bookListSlice';
+import { getBooksAction, addNewBookAction, selectAsyncStatus } from './bookListSlice';
 
 import { selectAllBooks } from './bookListSlice';
 import { useSelector, useDispatch } from "react-redux";
@@ -22,6 +22,8 @@ const BookSchedule = () => {
   // GET from API
   // const booksFromStore = useSelector(selectAllBooks);
   const books = useSelector(selectAllBooks);
+  //получение статуса действий со слайсом книг
+  const { error, asyncStatus } = useSelector(selectAsyncStatus);
 
   const dispatch = useDispatch();
 
@@ -31,12 +33,16 @@ const BookSchedule = () => {
   const [newBookTitle, setNewBookTitle] = useState("");
   const [newBookStart, setNewBookStart] = useState(startDate);
   const [newBookEnd, setNewBookEnd] = useState(endDate);
-
+  
   // Fetch Data from API
   useEffect(() => {
-    console.log('fetching in effect')
     dispatch(getBooksAction());
   }, []);
+
+  //проверка наличия ошибки, при обновлении статуса приложения
+  useEffect(()=>{
+    if(error) alert(error);
+  }, [asyncStatus]);
       
   // Add a new book to the list
   const onAddNewBook = () => {
